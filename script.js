@@ -1,6 +1,5 @@
-// 다크모드
-
-const darkBtn = document.getElementById("darkBtn");
+const darkBtn =
+document.getElementById("darkBtn");
 
 darkBtn.addEventListener("click", () =>
 {
@@ -9,8 +8,8 @@ darkBtn.addEventListener("click", () =>
     localStorage.setItem(
         "theme",
         document.body.classList.contains("light")
-            ? "light"
-            : "dark"
+        ? "light"
+        : "dark"
     );
 });
 
@@ -20,7 +19,29 @@ if(localStorage.getItem("theme") === "light")
 }
 
 
-// 프로젝트 필터
+const typing =
+document.getElementById("typing");
+
+const text =
+"Game Client Developer";
+
+let index = 0;
+
+function typeEffect()
+{
+    if(index < text.length)
+    {
+        typing.textContent +=
+        text.charAt(index);
+
+        index++;
+
+        setTimeout(typeEffect,100);
+    }
+}
+
+typeEffect();
+
 
 const buttons =
 document.querySelectorAll(".filter-btn");
@@ -59,8 +80,6 @@ buttons.forEach(button =>
 });
 
 
-// 스크롤 애니메이션
-
 const observer =
 new IntersectionObserver(entries =>
 {
@@ -79,3 +98,27 @@ document
 {
     observer.observe(item);
 });
+
+
+const skillObserver =
+new IntersectionObserver(entries =>
+{
+    entries.forEach(entry =>
+    {
+        if(entry.isIntersecting)
+        {
+            const bars =
+            entry.target.querySelectorAll(".fill");
+
+            bars.forEach(bar =>
+            {
+                bar.style.width =
+                bar.dataset.width + "%";
+            });
+        }
+    });
+});
+
+skillObserver.observe(
+document.getElementById("skills")
+);
